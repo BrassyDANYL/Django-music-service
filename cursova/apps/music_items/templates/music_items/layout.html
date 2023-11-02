@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>{% block title %}{% endblock %}</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Teko&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{% static '/css/null.css' %}">
+   <link rel="stylesheet" href="{% static '/css/colors.css' %}">
+   <link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+
+<body>
+   <header>
+      <div class="logo">SoundVibe</div>
+      <ul class="header-menu">
+         <li><a href="/">Home</a></li>
+         <li><a href="#">Artists</a></li>
+         <li><a href="#">Sign in</a></li>
+      </ul>
+      <form action="{% url 'search'%}" method="get">
+      
+         <input type="search" type="text" name="q" placeholder="Search ...">
+         <button type="submit">Search</button>
+      
+      </form>
+   </header>
+   {% block content %}
+   {% endblock %}
+</body>
+
+</html>

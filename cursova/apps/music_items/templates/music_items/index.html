@@ -1,0 +1,15 @@
+{% extends 'music_items/layout.html' %}
+
+{% block content %}
+    {% for el in songs %}
+    <div class="song-single">
+        <div class="album-photo">
+            <img src="{{ el.albums.first.photo.url }}" alt="{{ el.album.name }}">
+        </div>
+        <h3 class="name">{{ el.song_name }}</h3>
+        <a href="#" class="album">{{ el.albums.first.name }}</a>
+        <a href="#" class="singer">{{ el.singers.first.name }}</a>
+    </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'music_items/layout.html' %}
+
+{% block content %}
+<h1>Search Results</h1>
+<ul>
+   {% for result in search_results %}
+   <li>{{ result.song_name }} by {{ result.singers.first.name }} from {{ result.albums.first.name }}</li>
+   {% endfor %}
+</ul>
+{% endblock %}
