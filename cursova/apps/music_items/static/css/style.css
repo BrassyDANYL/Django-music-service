@@ -1,5 +1,6 @@
 body {
    background-color: var(--background-color);
+   font-family: 'Teko', sans-serif;
 }
 .logo {
    font-family: 'Nova Square', sans-serif;
@@ -24,7 +25,6 @@ header {
 .header-menu a {
    text-decoration: none;
    color: var(--text-color);
-   font-family: 'Teko', sans-serif;
    font-size: 18px;
    transition: 0.4s;
 }
@@ -46,9 +46,12 @@ header form input {
    padding: 5px 10px;
 }
 .song-single {
+   transition: 0.4s;
+   position: relative;
    width: 220px;
    padding: 10px;
    background-color: rgba(255,255,255, 0.1);
+   overflow: hidden;
 }
 .song-single .album-photo {
    width: 200px;
@@ -60,10 +63,32 @@ header form input {
 }
 .song-single .name {
    color: var(--text-color);
-   font-family: 'Teko', sans-serif;
    font-size: 20px;
    padding-top: 5px;
 }
 .song-single a {
    display: block;
+   font-family: 'Inter', sans-serif;
+   text-decoration: none;
+   color: #fff;
+}
+.song-single .play-button {
+   background-color: var(--text-color);
+   border: none;
+   width: 45px;
+   height: 45px;
+   border-radius: 50px;
+   position: absolute;
+   z-index: 2;
+   right: -20px;
+   bottom: -20px;
+   transition: 0.4s;
+   visibility: hidden;
+   opacity: 0;
+}
+.song-single:hover .play-button {
+   right: 10px;
+   bottom: 10px;
+   visibility: visible;
+   opacity: 1;
 }
