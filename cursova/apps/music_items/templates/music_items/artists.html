@@ -1,0 +1,13 @@
+{% extends 'music_items/layout.html' %}
+
+{% block content %}
+{% for singer in singers %}
+<div class="col-md-4">new-page</div>
+<div class="singer">
+   <h2>{{ singer.name }}</h2>
+   <img src="{{ singer.photo.url }}" alt="{{ singer.name }} Photo">
+   <!-- Додайте інші дані про виконавця, які вам потрібні -->
+   <!-- Наприклад, жанри, альбоми, пісні, тощо. -->
+</div>
+{% endfor %}
+{% endblock %}

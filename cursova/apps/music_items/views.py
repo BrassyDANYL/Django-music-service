@@ -6,6 +6,8 @@ def index(request):
    songs = Song.objects.all()
    return render(request, 'music_items/index.html', {'songs': songs})
 
+def artists(request):
+    return render(request, 'music_items/artists.html')
 class Search(ListView):
     model = Song  # Модель для пошуку
     template_name = 'music_items/search-results.html'  # Шаблон для відображення результатів

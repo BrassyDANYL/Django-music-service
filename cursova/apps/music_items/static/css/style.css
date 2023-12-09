@@ -2,6 +2,18 @@ body {
    background-color: var(--background-color);
    font-family: 'Teko', sans-serif;
 }
+.container {
+   width: 100%;
+   max-width: 1240px;
+   padding: 0px 20px;
+   margin: 0 auto;
+}
+.main-list {
+   display: flex;
+   flex-direction: row;
+   gap: 20px;
+   flex-wrap: wrap;
+}
 .logo {
    font-family: 'Nova Square', sans-serif;
    color: var(--text-color);
@@ -91,4 +103,58 @@ header form input {
    bottom: 10px;
    visibility: visible;
    opacity: 1;
+}
+.player {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   transition: 1.4s;
+   background-color: rgba(43, 6, 56, 0.5);
+   color: #fff;
+   width: 100%;
+   height: 100px;
+   position: fixed;
+   left: 0px;
+   padding: 0px 20px;
+   bottom: 0px;
+}
+.player-hidden {
+   bottom: -100%;
+   transition: 0.4s;
+}
+.player-show {
+   bottom: 0%;
+   transition: 0.4s;
+}
+.player .info {
+   display: flex;
+   flex-direction: row;
+}
+
+.player .progressTime {
+   display: flex; 
+   flex-direction: row;
+   width: 33%;
+   align-items: center;
+   gap: 10px;
+}
+
+.player .progress {
+   height: 5px;
+   background-color: #fff;
+}
+
+.player .progress__container {
+   width: 100%;
+   background-color: rgb(73, 73, 73);
+   height: 5px;
+   border: 10px;
+   overflow: hidden;
+}
+
+.player .buttons {
+   display: flex;
+   flex-direction: row;
+   gap: 10px;
+   align-items: center;
 }

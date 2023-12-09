@@ -1,5 +1,11 @@
 from django.db import models
 
+class Genre(models.Model):
+    name = models.CharField('Genre', max_length=100)
+
+    def __str__(self):
+        return self.name
+
 class Singer(models.Model):
     name = models.CharField("Singer's name", max_length=100)
     photo = models.ImageField("Singer's photo", upload_to='img/singer/', default='static/img/singer/default.jpg')
@@ -19,6 +25,7 @@ class Song(models.Model):
     song_name = models.CharField('Song name', max_length=100)
     singers = models.ManyToManyField(Singer, related_name='songs')
     albums = models.ManyToManyField(Album, related_name='songs')
+    genres = models.ManyToManyField(Genre, related_name='songs')  # Додано поле для жанру
     pub_date = models.DateTimeField('Publication Date', auto_now_add=True)
     audio_file = models.FileField('Audio File', upload_to='audio/', default='static/audio/default_audio.mp3')
 

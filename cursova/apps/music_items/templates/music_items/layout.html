@@ -19,11 +19,12 @@
 </head>
 
 <body>
+<div class="container">
    <header>
       <div class="logo">SoundVibe</div>
       <ul class="header-menu">
          <li><a href="/">Home</a></li>
-         <li><a href="#">Artists</a></li>
+         <li><a href="/artists">Artists</a></li>
          <li><a href="#">Sign in</a></li>
       </ul>
       <form action="{% url 'search'%}" method="get">
@@ -33,8 +34,35 @@
       
       </form>
    </header>
+</div>
+
+   <div class="container main-list">
    {% block content %}
    {% endblock %}
+   </div>
+   <div class="container player-container">
+      <audio class="audio" src=""></audio>
+      <div class="player player-hidden">
+         <div class="info">
+            <div class="cover"><img src="" alt="album" class="cover__img"></div>
+            <div class="info-right">
+               <div class="song"></div>
+               <div class="player-album"></div>
+            </div>
+         </div>
+         <div class="progressTime">
+            <div class="timer">g</div>
+            <div class="progress__container">
+               <div class="progress"></div>
+            </div>
+         </div>
+         <div class="buttons">
+            <div class="btn prev"><i class="fas fa-backward"></i></div>
+            <div class="btn play"><i class="img__src fas fa-play"></i></div>
+            <div class="btn next"><i class="fas fa-forward"></i></div>
+         </div>
+      </div>
+   </div>
 </body>
 <footer>
 
