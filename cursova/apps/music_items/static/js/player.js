@@ -9,7 +9,7 @@ const player = document.querySelector('.player'),
    cover = document.querySelector('.cover'),
    coverImage = document.querySelector('.cover__img'),
    imgSrc = document.querySelector('.img__src'),
-   albumName = document.querySelector('.player-album'),
+   songerName = document.querySelector('.player-album'),
    timer = document.querySelector('.timer'),
    songer = document.querySelector('.author')
 
@@ -20,10 +20,14 @@ function songChoice() {
       $(".song-single").removeClass('active');
       $(this).addClass('active');
       var text = $(this).find('.name').text();
-      var textAlbum = $(this).find('.album').text();
       var songerName = $(this).find('.singer').text();
       var path = $(this).data('audio');
-      loadSong(text, textAlbum, songerName, path);
+      var albumPath = $(this).find('.album-photo').find('img').attr('src');
+      var playBtn = $(this).find('.play-button');
+      playBtn.removeClass('fa-play');
+      playBtn.addClass('fa-pause');
+      console.log(albumPath);
+      loadSong(text, songerName, path, albumPath);
       console.log(path);
       playSong();
    })
@@ -32,11 +36,11 @@ function songChoice() {
 
 
 //Load
-function loadSong(song, album, songer, path) {
+function loadSong(song, songer, path, albumPath) {
    title.innerHTML = song,
-   albumName.innerHTML = songer,
-   audio.src = path
-   // coverImage.src = 'img/albums/' + album + '.jpg'
+   songerName.innerHTML = songer,
+   audio.src = path,
+   coverImage.src = albumPath
 }
 
 loadSong(songChoice(), "g");
@@ -78,13 +82,15 @@ function prevSong() {
    const currentSongIndex = Array.from(cbox).findIndex(box => box.classList.contains('active'));
    const nextSongIndex = currentSongIndex === 0 ? cbox.length - 1 : currentSongIndex - 1;
    const nextSongBox = cbox[nextSongIndex];
-   $(".flex-elem").removeClass('active');
+   console.log(nextSongBox);
+   $(".song-single").removeClass('active');
    nextSongBox.classList.add('active');
    const nextSongTitle = nextSongBox.querySelector('.name').textContent;
-   const nextSongAlbum = nextSongBox.querySelector('.album').textContent;
-   const nextSongArtist = nextSongBox.querySelector('.author').textContent;
+   const nextSongArtist = nextSongBox.querySelector('.singer').textContent;
+   const nextSongPath = nextSongBox.getAttribute('data-audio');
+   const nextSongAlbumPath = nextSongBox.querySelector('.album-photo img').getAttribute('src');
 
-   loadSong(nextSongTitle, nextSongAlbum, nextSongArtist);
+   loadSong(nextSongTitle, nextSongArtist, nextSongPath, nextSongAlbumPath);
 
    playSong();
 
@@ -98,13 +104,15 @@ function nextSong() {
    const currentSongIndex = Array.from(cbox).findIndex(box => box.classList.contains('active'));
    const nextSongIndex = currentSongIndex === cbox.length - 1 ? 0 : currentSongIndex + 1;
    const nextSongBox = cbox[nextSongIndex];
-   $(".flex-elem").removeClass('active');
+   console.log(nextSongBox);
+   $(".song-single").removeClass('active');
    nextSongBox.classList.add('active');
    const nextSongTitle = nextSongBox.querySelector('.name').textContent;
-   const nextSongAlbum = nextSongBox.querySelector('.album').textContent;
-   const nextSongArtist = nextSongBox.querySelector('.author').textContent;
+   const nextSongArtist = nextSongBox.querySelector('.singer').textContent;
+   const nextSongPath = nextSongBox.getAttribute('data-audio');
+   const nextSongAlbumPath = nextSongBox.querySelector('.album-photo img').getAttribute('src');
 
-   loadSong(nextSongTitle, nextSongAlbum, nextSongArtist);
+   loadSong(nextSongTitle, nextSongArtist, nextSongPath, nextSongAlbumPath);
 
    playSong();
 }
@@ -135,58 +143,13 @@ function setProgress(e) {
    const clickX = e.offsetX;
    const duration = audio.duration;
    audio.currentTime = (clickX / width) * duration;
-
 }
 progressContainer.addEventListener('click', setProgress);
 
-
-//change header color
-$(function () {
-   $(document).scroll(function () {
-      var $nav = $(".header");
-      $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-   });
-})
-
-//burger
-$('.burger').on('click', function () {
-
-   $('.header-menu').toggleClass('open-burger');
-
-});
-//loadmore 
-let offset = 3; // Початкове значення змінної offset
-
-function loadMore() {
-   // Відправити AJAX-запит на сервер з параметром offset
-   $.ajax({
-      url: 'loadmore.php',
-      type: 'POST',
-      data: { offset: offset },
-      success: function (data) {
-         // Додати отримані дані до списку пісень
-         $('.flex-container').append(data);
-         // Збільшити значення змінної offset
-         offset += 3;
-      }
-   });
+function startPlayAlbum() {
+   const albumPlayButton = document.querySelector('.play-album');
+   addEventListener()
 }
-
-// Відслідковувати скролінг сторінки
-$(window).scroll(function () {
-   // Якщо користувач докрутив до кінця списку
-   if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-      $('.load-more-container').css('display', 'none');
-   }
-});
-
-// Відслідковувати клік на кнопку "Load More"
-$('.load-more-btn').click(function () {
-   loadMore();
-});
-
-
-
 
 
 

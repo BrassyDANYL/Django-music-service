@@ -16,23 +16,29 @@
    <link rel="stylesheet" href="{% static '/css/null.css' %}">
    <link rel="stylesheet" href="{% static '/css/colors.css' %}">
    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+   <link rel="stylesheet" href="{% static '/css/artist_detail.css' %}">
+   <link rel="stylesheet" href="{% static '/css/album_songs.css' %}">
+
 </head>
 
 <body>
+<canvas id="canvas"></canvas>
 <div class="container">
    <header>
-      <div class="logo">SoundVibe</div>
-      <ul class="header-menu">
-         <li><a href="/">Home</a></li>
-         <li><a href="/artists">Artists</a></li>
-         <li><a href="#">Sign in</a></li>
-      </ul>
-      <form action="{% url 'search'%}" method="get">
-      
-         <input type="search" type="text" name="q" placeholder="Search ...">
-         <button type="submit">Search</button>
-      
-      </form>
+      <div class="container header-container">
+         <div class="logo">SoundVibe</div>
+         <ul class="header-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/artists">Artists</a></li>
+            <li><a href="/admin">Sign in</a></li>
+         </ul>
+         <form action="{% url 'search'%}" method="get">
+         
+            <input type="search" type="text" name="q" placeholder="Search ...">
+            <button class="fas fa-search" type="submit"></button>
+         
+         </form>
+      </div>
    </header>
 </div>
 
@@ -70,5 +76,7 @@
    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
    <script src="../../static/js/player.js"></script>
+   <script src="../../static/js/background.js"></script>
+   <script src="../../static/js/script.js"></script>
 </footer>
 </html>

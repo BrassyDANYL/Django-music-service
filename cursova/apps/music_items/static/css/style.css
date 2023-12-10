@@ -1,18 +1,28 @@
 body {
    background-color: var(--background-color);
    font-family: 'Teko', sans-serif;
+   position: relative;
+}
+canvas {
+   width: 100%;
+   height: 100%;
+   position: absolute;
 }
 .container {
+   position: relative;
    width: 100%;
    max-width: 1240px;
    padding: 0px 20px;
    margin: 0 auto;
 }
 .main-list {
+   padding-top: 110px;
+   padding-bottom: 140px;
    display: flex;
    flex-direction: row;
    gap: 20px;
    flex-wrap: wrap;
+   justify-content: center;
 }
 .logo {
    font-family: 'Nova Square', sans-serif;
@@ -22,8 +32,20 @@ body {
 }
 header {
    padding: 20px 10px;
+   background-color: rgba(0, 0, 0, 0.35);
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   z-index: 4;
+   width: 100%;
+   transition: 0.4s;
+}
+header.scrolled {
+   background-color: rgba(0, 0, 0, 0.8);
+   transition: 0.4s;
+}
+.header-container {
    display: flex;
-   flex-direction: row;
    justify-content: space-between;
 }
 .header-menu {
@@ -36,9 +58,12 @@ header {
 }
 .header-menu a {
    text-decoration: none;
-   color: var(--text-color);
+   color: #fff;
    font-size: 18px;
    transition: 0.4s;
+}
+.header-menu li {
+   align-self: center;
 }
 .header-menu li:hover a{
    transition: 0.4s;
@@ -52,17 +77,28 @@ header form {
    gap: 20px;
 }
 header form input {
-   border: 1px solid var(--text-color);
-   background-color: var(--secondary-color);
+   outline: none;
+   border: none;
+   background-color: transparent;
    border-radius: 8px;
    padding: 5px 10px;
+   color: #fff;
+}
+header .fa-search {
+   outline: none;
+   border: none;
+   background-color: transparent;
+   color: #fff;
+}
+input::placeholder {
+   color: #fff;
 }
 .song-single {
    transition: 0.4s;
    position: relative;
    width: 220px;
    padding: 10px;
-   background-color: rgba(255,255,255, 0.1);
+   background-color: rgba(255,255,255, 0.15);
    overflow: hidden;
 }
 .song-single .album-photo {
@@ -85,6 +121,7 @@ header form input {
    color: #fff;
 }
 .song-single .play-button {
+   color: #fff;
    background-color: var(--text-color);
    border: none;
    width: 45px;
@@ -105,17 +142,18 @@ header form input {
    opacity: 1;
 }
 .player {
+   z-index: 10;
    display: flex;
    flex-direction: row;
    justify-content: space-between;
    transition: 1.4s;
-   background-color: rgba(43, 6, 56, 0.5);
+   background-color: rgba(0, 0, 0, 0.8);
    color: #fff;
    width: 100%;
-   height: 100px;
+   height: 120px;
    position: fixed;
    left: 0px;
-   padding: 0px 20px;
+   padding: 10px 20px;
    bottom: 0px;
 }
 .player-hidden {
@@ -129,6 +167,8 @@ header form input {
 .player .info {
    display: flex;
    flex-direction: row;
+   gap: 20px;
+   min-width: 240px
 }
 
 .player .progressTime {
@@ -140,15 +180,15 @@ header form input {
 }
 
 .player .progress {
-   height: 5px;
+   height: 100%;
    background-color: #fff;
 }
 
 .player .progress__container {
    width: 100%;
    background-color: rgb(73, 73, 73);
-   height: 5px;
-   border: 10px;
+   height: 10px;
+   border-radius: 10px;
    overflow: hidden;
 }
 
@@ -157,4 +197,46 @@ header form input {
    flex-direction: row;
    gap: 10px;
    align-items: center;
+}
+.player .cover {
+   width: 100px;
+   height: 100px;
+   border-radius: 50px;
+   overflow: hidden;
+}
+.player .cover img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+.player .info-right {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+.songer-single {
+   color: var(--text-color);
+   text-decoration: none;
+   transition: 0.4s;
+   position: relative;
+   width: 220px;
+   padding: 10px;
+   background-color: rgba(255, 255, 255, 0.1);
+   overflow: hidden;
+}
+
+.songer-single .album-photo {
+   width: 200px;
+   height: 200px;
+}
+
+.songer-single .album-photo img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.songer-single .name {
+   font-size: 20px;
+   padding-top: 5px;
 }

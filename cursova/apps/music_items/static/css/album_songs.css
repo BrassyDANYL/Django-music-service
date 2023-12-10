@@ -1,0 +1,56 @@
+.banner-album {
+   width: 100%;
+   background-color: rgba(255,255,255,0.1);
+   border-radius: 10px;
+   padding: 20px;
+   display: flex;
+   gap: 20px;
+   color: #fff;
+   font-size: 20px;
+}
+.banner-album .title {
+   font-size: 48px;
+}
+.banner-album .info {
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+   justify-content: center;
+}
+.album-single-elem {
+   transition: 0.4s;
+   border-radius: 10px;
+   display: flex;
+   flex-direction: row;
+   gap: 20px;
+   background-color: transparent;
+   width: 100%;
+   .album-photo {
+      display: none;
+   }
+   .play-button {
+      color: #fff;
+      position: static;
+      visibility: visible;
+      opacity: 1;
+   }
+   .play-button-con {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+   }
+}
+
+.album-single-elem:hover {
+   background-color: rgba(255, 255, 255, 0.1);
+   transition: 0.4s;
+}
+.play-album {
+   width: 50px;
+   height: 50px;
+   border-radius: 50px;
+   color: #fff;
+   border: none;
+   outline: none;
+   background-color: var(--text-color);
+}

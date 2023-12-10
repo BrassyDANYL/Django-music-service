@@ -1,0 +1,23 @@
+{% extends 'music_items/layout.html' %}
+
+{% block content %}
+<div class="singer-info">
+   <div class="banner">
+      <img src="/static{{ singer.banner_photo.url }}" alt="{{ singer.name }} Banner">
+      <h2>{{ singer.name }}</h2>
+   </div>
+
+   <h3>Albums:</h3>
+   <div class="albums-list">
+   {% for album in albums %}
+      <a class="album-small"  href="{% url 'album_songs' album.id %}">
+         <img src="/static{{ album.photo.url }}" alt="{{ album.name }} Photo">
+         <div class="album-info">
+            <div>{{ album.name }}</div>
+            <div>{{ album.release_year }}</div>
+         </div>
+      </a>
+   {% endfor %}
+   </div>
+</div>
+{% endblock %}
