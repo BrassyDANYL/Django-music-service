@@ -1,19 +1,40 @@
 const player = document.querySelector('.player'),
-   playBtn = document.querySelector('.play'),
-   prevBtn = document.querySelector('.prev'),
-   nextBtn = document.querySelector('.next'),
-   audio = document.querySelector('.audio'),
-   progressContainer = document.querySelector('.progress__container'),
-   progress = document.querySelector('.progress'),
-   title = document.querySelector('.song'),
-   cover = document.querySelector('.cover'),
-   coverImage = document.querySelector('.cover__img'),
-   imgSrc = document.querySelector('.img__src'),
-   songerName = document.querySelector('.player-album'),
-   timer = document.querySelector('.timer'),
-   songer = document.querySelector('.author')
+      playBtn = document.querySelector('.play'),
+      prevBtn = document.querySelector('.prev'),
+      nextBtn = document.querySelector('.next'),
+      audio = document.querySelector('.audio'),
+      progressContainer = document.querySelector('.progress__container'),
+      progress = document.querySelector('.progress'),
+      title = document.querySelector('.song'),
+      cover = document.querySelector('.cover'),
+      coverImage = document.querySelector('.cover__img'),
+      imgSrc = document.querySelector('.img__src'),
+      songerName = document.querySelector('.player-album'),
+      timer = document.querySelector('.timer'),
+      songer = document.querySelector('.author')
+      startAlbumButton = document.querySelector('.play-album')
 
 const cbox = document.querySelectorAll('.song-single');
+
+function isAudioPlaying() {
+   return !audio.paused;
+}
+function isAudioPausedOrNotPlayed() {
+   return audio.paused || audio.currentTime === 0;
+}
+
+document.addEventListener('click', function (event) {
+   if (isAudioPlaying()) {
+      playBtn.classList.replace('fa-play', 'fa-pause');
+      startAlbumButton.classList.replace('fa-play', 'fa-pause');
+   } 
+   else {
+      console.log('ne playing')
+      playBtn.classList.replace('fa-pause', 'fa-play');
+      startAlbumButton.classList.replace('fa-pause', 'fa-play');
+   }
+});
+
 
 function songChoice() {
    $(".song-single").on('click', function () {
@@ -23,12 +44,9 @@ function songChoice() {
       var songerName = $(this).find('.singer').text();
       var path = $(this).data('audio');
       var albumPath = $(this).find('.album-photo').find('img').attr('src');
-      var playBtn = $(this).find('.play-button');
-      playBtn.removeClass('fa-play');
-      playBtn.addClass('fa-pause');
-      console.log(albumPath);
+      var playCurrent = $(this).find('.play-button');
+      // playCurrent.classList.replace('fa-play', 'fa-pause');
       loadSong(text, songerName, path, albumPath);
-      console.log(path);
       playSong();
    })
 
@@ -51,8 +69,6 @@ function playSong() {
    player.classList.remove('player-hidden');
    player.classList.add('player-show');
    cover.classList.add('active__img');
-   imgSrc.classList.remove('fa-play');
-   imgSrc.classList.add('fa-pause');
    audio.play();
    $('.flex-container').css('padding-bottom', '120px');
 }
@@ -60,15 +76,12 @@ function playSong() {
 //Pause
 function pauseSong() {
    player.classList.remove('play'),
-      imgSrc.classList.add('fa-play'),
-      imgSrc.classList.remove('fa-pause'),
       cover.classList.remove('active__img'),
       audio.pause();
 }
 playBtn.addEventListener('click', () => {
-   const isPlaying = player.classList.contains('play');
 
-   if (isPlaying) {
+   if (isAudioPlaying()) {
       pauseSong();
    }
    else {
@@ -147,9 +160,25 @@ function setProgress(e) {
 progressContainer.addEventListener('click', setProgress);
 
 function startPlayAlbum() {
-   const albumPlayButton = document.querySelector('.play-album');
-   addEventListener()
+   if (isAudioPlaying()) {
+      audio.pause();
+   } else if (isAudioPausedOrNotPlayed()) {
+      audio.play();
+   } else {
+      const songs = document.querySelectorAll('.song-single');
+      if (songs.length > 0) {
+         const firstSong = songs[0];
+
+         $(firstSong).addClass('active');
+         var text = $(firstSong).find('.name').text();
+         var songerName = $(firstSong).find('.singer').text();
+         var path = $(firstSong).data('audio');
+         var albumPath = $(firstSong).find('.album-photo').find('img').attr('src');
+         loadSong(text, songerName, path, albumPath);
+         playSong();
+      }
 }
-
-
-
+}
+startAlbumButton.addEventListener('click', function () {
+   startPlayAlbum();
+});

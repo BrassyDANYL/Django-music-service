@@ -27,7 +27,7 @@ class Song(models.Model):
     song_name = models.CharField('Song name', max_length=100)
     singers = models.ManyToManyField(Singer, related_name='songs')
     albums = models.ManyToManyField(Album, related_name='songs')
-    genres = models.ManyToManyField(Genre, related_name='songs')  # Додано поле для жанру
+    genres = models.ManyToManyField(Genre, related_name='songs')  
     pub_date = models.DateTimeField('Publication Date', auto_now_add=True)
     audio_file = models.FileField('Audio File', upload_to='audio/', default='static/audio/default_audio.mp3')
 
