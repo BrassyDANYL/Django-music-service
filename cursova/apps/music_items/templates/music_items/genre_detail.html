@@ -1,0 +1,30 @@
+{% extends 'music_items/layout.html' %}
+
+{% block content %}
+<div class="banner-album">
+   <div class="album-photo">
+      <img src="/static{{ genre.banner_photo.url }}" alt="{{ genre.name }} Banner">
+   </div>
+   <div class="info">
+      <div>Genre</div>
+      <div class="title">{{ genre.name }}</div>
+      <button class="play-album fa-solid fa-play"></button>
+   </div>
+</div>
+
+{% for song in songs %}
+<div class="song-single album-single-elem" data-audio="/static{{ song.audio_file.url }}">
+   <div class="album-photo">
+      <img src="/static{{ song.albums.first.photo.url }}" alt="{{ song.album.name }}">
+   </div>
+   <div class="play-button-con">
+      <button class="play-button fa-solid fa-play"></button>
+   </div>
+   <div class="info">
+      <h3 class="name">{{ song.song_name }}</h3>
+      <a href="#" class="album">{{ song.albums.first.name }}</a>
+      <a href="#" class="singer">{{ song.singers.first.name }}</a>
+   </div>
+</div>
+{% endfor %}
+{% endblock %}

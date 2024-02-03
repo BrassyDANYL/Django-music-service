@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Singer, Song, Album
+from .models import Singer, Song, Album, Genre
 from django.views.generic import ListView
 from random import shuffle
 
@@ -13,10 +13,19 @@ def artists(request):
     singers = Singer.objects.all()
     return render(request, 'music_items/artists.html', {'singers': singers})
 
+def genres(request):
+    genres = Genre.objects.all()
+    return render(request, 'music_items/genres.html', {'genres': genres})
+
 def artist_detail(request, singer_id):
     singer = get_object_or_404(Singer, pk=singer_id)
     albums = Album.objects.filter(artist=singer)
     return render(request, 'music_items/artist_detail.html', {'singer': singer, 'albums': albums})
+
+def genre_detail(request, genre_id):
+    genre = get_object_or_404(Genre, pk=genre_id)
+    songs = Song.objects.filter(genres=genre)
+    return render(request, 'music_items/genre_detail.html', {'genre': genre, 'songs': songs})
 
 def album_songs(request, album_id):
     album = get_object_or_404(Album, id=album_id)

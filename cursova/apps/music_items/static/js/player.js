@@ -20,18 +20,27 @@ function isAudioPlaying() {
    return !audio.paused;
 }
 function isAudioPausedOrNotPlayed() {
-   return audio.paused || audio.currentTime === 0;
+   return audio.paused || audio.currentTime >= 0;
+}
+function isTimeMore() {
+   return audio.currentTime >= 0;
 }
 
 document.addEventListener('click', function (event) {
    if (isAudioPlaying()) {
       playBtn.classList.replace('fa-play', 'fa-pause');
       startAlbumButton.classList.replace('fa-play', 'fa-pause');
+      
    } 
    else {
       console.log('ne playing')
       playBtn.classList.replace('fa-pause', 'fa-play');
       startAlbumButton.classList.replace('fa-pause', 'fa-play');
+      var allplayButtons = document.querySelectorAll('.play-button');
+      allplayButtons.forEach(function (button) {
+         button.classList.remove('fa-pause');
+         button.classList.add('fa-play');
+      });
    }
 });
 
@@ -45,9 +54,15 @@ function songChoice() {
       var path = $(this).data('audio');
       var albumPath = $(this).find('.album-photo').find('img').attr('src');
       var playCurrent = $(this).find('.play-button');
-      // playCurrent.classList.replace('fa-play', 'fa-pause');
+      var allplayButtons = document.querySelectorAll('.play-button');
+      allplayButtons.forEach(function (button) {
+         button.classList.remove('fa-pause');
+         button.classList.add('fa-play');
+      });
+      playCurrent.removeClass('fa-play').addClass('fa-pause');
       loadSong(text, songerName, path, albumPath);
       playSong();
+      
    })
 
 }
@@ -69,8 +84,11 @@ function playSong() {
    player.classList.remove('player-hidden');
    player.classList.add('player-show');
    cover.classList.add('active__img');
+   if(isAudioPlaying()) {
+      audio.pause()
+   } else {
    audio.play();
-   $('.flex-container').css('padding-bottom', '120px');
+   }
 }
 
 //Pause

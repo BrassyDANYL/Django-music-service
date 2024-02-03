@@ -2,6 +2,9 @@ from django.db import models
 
 class Genre(models.Model):
     name = models.CharField('Genre', max_length=100)
+    image = models.ImageField('Genre Image', upload_to='img/genre/', default='static/img/genre/default.jpg')
+    banner_photo = models.ImageField('Banner Photo', upload_to='img/genre_banner/', default='static/img/genre_banner/default_banner.jpg')
+
 
     def __str__(self):
         return self.name

@@ -1,0 +1,13 @@
+{% extends 'music_items/layout.html' %}
+{% block content %}
+{% for genre in genres %}
+<a class="songer-single" href="{% url 'genre_detail' genre.id %}">
+   <div class="album-photo">
+      <img src="/static{{ genre.image.url }}" alt="{{ genre.name }} Photo">
+   </div>
+
+   <h2>{{ genre.name }}</h2>
+</a>
+{% endfor %}
+
+{% endblock %}
